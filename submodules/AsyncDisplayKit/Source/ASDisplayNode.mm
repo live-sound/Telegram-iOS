@@ -3450,7 +3450,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 - (ASDisplayNodePerformanceMeasurements)performanceMeasurements
 {
   MutexLocker l(__instanceLock__);
-  ASDisplayNodePerformanceMeasurements measurements = { .layoutSpecNumberOfPasses = -1, .layoutSpecTotalTime = NAN, .layoutComputationNumberOfPasses = -1, .layoutComputationTotalTime = NAN };
+  ASDisplayNodePerformanceMeasurements measurements = { NAN, -1, NAN, -1 };
   if (_measurementOptions & ASDisplayNodePerformanceMeasurementOptionLayoutSpec) {
     measurements.layoutSpecNumberOfPasses = _layoutSpecNumberOfPasses;
     measurements.layoutSpecTotalTime = _layoutSpecTotalTime;

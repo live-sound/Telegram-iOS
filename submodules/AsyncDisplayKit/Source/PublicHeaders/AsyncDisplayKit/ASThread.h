@@ -108,8 +108,11 @@ namespace AS {
 // Silence unguarded availability warnings in here, because
 // perf is critical and we will check availability once
 // and not again.
+// Clang's thread-safety analysis loses track of the active union member in
+// this lock wrapper and reports false positives when -Werror is enabled.
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunguarded-availability"
+#pragma clang diagnostic ignored "-Wthread-safety-analysis"
   class Mutex
   {
   public:
@@ -290,7 +293,7 @@ namespace AS {
     int _count = 0;
 #endif
   };
-#pragma clang diagnostic pop // ignored "-Wunguarded-availability"
+#pragma clang diagnostic pop // ignored "-Wunguarded-availability" and "-Wthread-safety-analysis"
   
   /**
    Obj-C doesn't allow you to pass parameters to C++ ivar constructors.
